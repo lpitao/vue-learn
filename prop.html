@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+body {
+  color: #006494;
+}
+
+#app {
+  text-align: center;
+  margin: 60px;
+  max-width: 370px;
+  margin: 0 auto;
+  display: table;
+}
+
+.num {
+  color: #AF007E;
+}
+
+h4 {
+  margin-bottom: 0;
+}
+
+button {
+  color: #051923;
+  border: 0;
+  padding: 5px 15px;
+  margin: 0 10px;
+  border-radius: 4px;
+  outline: 0;
+  cursor: pointer;
+}
+
+hr {
+  border-color: #F2FAFF;
+  opacity: 0.5;
+}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+		  <h3>
+		    <button @click="increment">+</button>
+		    Adjust the data
+		    <button @click="decrement">-</button>
+		  </h3>
+		  <h2>This is the app data: <span class="num">{{ count }}</span></h2>
+		  <h4>
+		    <child :count="count"></child>
+		  </h4>
+		  <p>This is a child counter that is using a static integer as props</p>
+		 
+		  <h4>
+		    <child :count="count"></child>
+		  </h4>
+		  <p>This is the same child counter and it is using the vue instance data as props</p>
+		</div>
+		<script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+		<script type="text/javascript">
+			Vue.component('child', {
+			  props: {
+			    count: {
+			      type: Number,
+			      required: true
+			    }
+			  },
+			  template: `<div class="num">{{ count }}</div>`
+			})
+			
+			new Vue({
+			  el: '#app',
+			  data() {
+			    return {
+			      count: 0
+			    }
+			  },
+			  methods: {
+			    increment() {
+			      this.count++
+			    },
+			    decrement() {
+			      this.count--
+			    }
+			  }
+			})
+
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+  font-family: 'Bitter', serif;
+}
+
+#app {
+  text-align: center;
+  margin: 60px;
+  max-width: 320px;
+  margin: 0 auto;
+  display: table;
+}
+
+.num {
+  color: #AF007E;
+}
+
+button {
+  font-family: 'Bitter';
+  background: #c62735;
+  color: white;
+  border: 0;
+  padding: 5px 15px;
+  margin: 0 10px;
+  border-radius: 4px;
+  outline: 0;
+  cursor: pointer;
+}
+
+h4 {
+  margin: 0 0 15px;
+}
+
+hr {
+  border-color: #F2FAFF;
+  opacity: 0.5;
+  margin: 15px 0;
+}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+		  <h3>Let's check out the lifecycle of this hur' child.</h3>
+		  <h4>Check the console!</h4>
+		  <button @click="toggleShow">
+		    <span v-if="isShowing">Hide child</span>
+		    <span v-else>Show child</span>
+		  </button>
+		  <hr>
+		  <div v-if="isShowing">
+		    <app-child></app-child>
+		  </div>
+		</div>
+		
+		<script type="text/x-template" id="childarea">
+		  <div>
+		  	<h4>Here I am!</h4>
+		  </div>
+		</script>
+		<script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+		<script type="text/javascript">
+			const Child = {
+			  template: '#childarea',
+			  beforeCreate() {
+			    console.log("beforeCreate!");
+			  }, 
+			  created() {
+			    console.log("created!");
+			  }, 
+			  beforeMount() {
+			    console.log("beforeMount!");
+			  }, 
+			  mounted() {
+			    console.log("mounted!");
+			  }, 
+			  beforeDestroy() {
+			    console.log("beforeDestroy!");
+			  }, 
+			  destroyed() {
+			    console.log("destroyed!");
+			  }
+			};
+			
+			new Vue({
+			  el: '#app',
+			  data() {
+			    return {
+			      isShowing: false 
+			    }
+			  },
+			  methods: {
+			    toggleShow() {
+			      this.isShowing = !this.isShowing;
+			    }
+			  },
+			  components: {
+			    appChild: Child
+			  }
+			});
+			
+		</script>
+	</body>
+</html>

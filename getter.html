@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			@import url(https://fonts.googleapis.com/css?family=Montserrat);
+html, body {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: montserrat;
+  background: linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+}
+
+#app {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  color: #666;
+  margin: 0 0 20px;
+}
+
+.form {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+input {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2C3E50;
+  font-size: 13px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.name {
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 5px 0;
+}
+
+.button {
+  padding: 12px 30px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s linear;
+  vertical-align: middle;
+  background: linear-gradient(to top, #ff3019 0%, #cf0404 100%);
+  color: #fff;
+  position: relative;
+}
+.button:hover {
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px -10px 20px;
+}
+.button:active {
+  box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 0px, inset rgba(255, 255, 255, 0.03) 0px 20px 0px, inset rgba(0, 0, 0, 0.15) 0px -20px 20px, inset rgba(255, 255, 255, 0.05) 0px 20px 20px;
+  text-shadow: 1px 1px 1px #eee;
+}
+.button:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%);
+  /* W3C */
+  padding: 1px 20px;
+  top: -1px;
+  left: 3px;
+  height: 0px;
+}
+.button:hover:before {
+  padding: 1px 15px;
+  animation-name: shine;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  left: 45px;
+}
+
+@keyframes shine {
+  0% {
+    top: -15px;
+    left: -48px;
+  }
+  10% {
+    top: -5px;
+  }
+  20% {
+    top: 5px;
+  }
+  30% {
+    top: 15px;
+  }
+  40% {
+    top: 25px;
+  }
+  50% {
+    top: 35px;
+  }
+  60% {
+    top: 25px;
+  }
+  70% {
+    top: 15px;
+  }
+  80% {
+    top: 5px;
+  }
+  90% {
+    top: -5px;
+  }
+  100% {
+    top: -15px;
+    left: 45px;
+    transform: rotate(-360deg);
+  }
+}
+
+		</style>
+	</head>
+	<body>
+		<div id="app">
+		  <div class="form">
+		    <input v-model="tempName" />
+		    <a @click="setName()" class="button">Set</a>
+		  </div>
+		  <div class="name">Full name: {{ fullName }}</div>
+		  <hr>
+		  <div class="name">First name: {{ firstName }}</div>
+		  <div class="name">Last name: {{ lastName }}</div>
+		</div>
+		<script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+		<script type="text/javascript">
+			let app = new Vue({
+			  el: '#app',
+			  data () {
+			    return {
+			      tempName: '',
+			      firstName: '',
+			      lastName: ''
+			    }
+			  },
+			  computed: {
+			    fullName: {
+			      // getter
+			      get: function () {
+			        return `${this.firstName} ${this.lastName}`
+			      },
+			      // setter
+			      set: function (newValue) {
+			        let names = newValue.split(' ')
+			        this.firstName = names[0]
+			        this.lastName = names[names.length - 1]
+			      }
+			    }
+			  },
+			  methods: {
+			    setName: function() {
+			    	this.fullName = this.tempName;
+			    }
+			  }
+			})
+		</script>
+	</body>
+</html>

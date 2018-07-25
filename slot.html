@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+			  font-family: 'Bitter', serif;
+			}
+			
+			#app {
+			  text-align: center;
+			  margin: 60px;
+			  max-width: 320px;
+			  margin: 0 auto;
+			  display: table;
+			}
+			
+			.child {
+			  border: 1px solid #c62735;
+			  border-radius: 4px;
+			  padding: 3px;
+			  margin: 7px;
+			  background: #f7eff0;
+			  opacity: 0.8;
+			}
+			
+			button {
+			  font-family: 'Bitter';
+			  background: #c62735;
+			  color: white;
+			  border: 0;
+			  padding: 5px 15px;
+			  margin: 0 10px;
+			  border-radius: 4px;
+			  outline: 0;
+			  cursor: pointer;
+			}
+			
+			h4 {
+			  margin: 0 0 15px;
+			}
+			
+			hr {
+			  border-color: #F2FAFF;
+			  opacity: 0.5;
+			  margin: 15px 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+		  <h2>We can use slots to populate content</h2>
+		  <app-child>
+		    <h3>This is slot number one</h3>
+		  </app-child>
+		  <app-child>
+		    <h3>This is slot number two</h3>
+		    <small>I can put more info in, too!</small>
+		  </app-child>
+		</div>
+		
+		<script type="text/x-template" id="childarea">
+		  <div class="child">
+		    <slot></slot>
+		    <p>It's a veritable slot machine!<br> 
+		    Ha ha aw</p>
+		  </div>
+		</script>
+		<script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+		<script type="text/javascript">
+			const Child = {
+			  template: '#childarea'
+			};
+			
+			new Vue({
+			  el: '#app',
+			  components: {
+			    appChild: Child
+			  }
+			});
+		</script>
+	</body>
+</html>
